@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jersyx | Pricelist Semenanjung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="initSemenanjung()">
+
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        <div id="priceListSection" style="display: block; opacity: 1; transform: translateY(0);">
+            <h1 class="title" style="font-size: 2.5rem; margin-bottom: 20px;">JERSYX APPAREL</h1>
+            
+            <div class="category-nav">
+                <button class="nav-btn active" id="btnAdult" onclick="slideSection('adult')">DEWASA</button>
+                <button class="nav-btn" id="btnKids" onclick="slideSection('kids')">KIDS</button>
+            </div>
+
+            <div class="slider-wrapper">
+                <div class="slider-content" id="sliderContent">
+                    
+                    <div class="slide">
+                        <div class="glass-card">
+                            <h2 class="card-title" id="locTitleAdult">HARGA DEWASA (SEMENANJUNG)</h2>
+                            <div class="table-responsive">
+                                <table class="price-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;">Kategori</th>
+                                            <th>Pendek</th>
+                                            <th>Panjang</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableAdult"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="glass-card add-on-card">
+                            <h3 class="card-title-small">ADD-ON (TAMBAHAN)</h3>
+                            <div class="table-responsive">
+                                <table class="price-table">
+                                    <tbody id="tableAddOn"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="glass-card add-on-card">
+                            <h4 class="card-title-small">POSTAGE</h4>
+                            <div class="table-responsive">
+                                <table class="price-table">
+                                    <tbody id="tableAddOnPostage"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide">
+                        <div class="glass-card">
+                            <h2 class="card-title" id="locTitleKids">HARGA KIDS (SEMENANJUNG)</h2>
+                            <div class="table-responsive">
+                                <table class="price-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;">Kategori</th>
+                                            <th>Pendek</th>
+                                            <th>Panjang</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableKids"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="glass-card add-on-card">
+                            <h3 class="card-title-small">ADD-ON (TAMBAHAN)</h3>
+                            <table class="price-table"><tbody id="tableAddOnKids"></tbody></table>
+                        </div>
+                        <div class="glass-card add-on-card">
+                            <h4 class="card-title-small">POSTAGE</h4>
+                            <table class="price-table"><tbody id="tableAddOnPostageKids"></tbody></table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

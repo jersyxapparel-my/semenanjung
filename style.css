@@ -1,0 +1,92 @@
+:root {
+    --primary: #00f0ff;
+    --secondary: #ff00d4;
+    --dark-1: #0a0a12;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glow-cyan: rgba(0, 240, 255, 0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--dark-1);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.ambient-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; }
+.orb-1 { width: 300px; height: 300px; background: var(--glow-cyan); top: -50px; left: -50px; }
+.orb-2 { width: 250px; height: 250px; background: var(--secondary); bottom: -50px; right: -50px; }
+
+.container { width: 100%; max-width: 900px; padding: 20px; text-align: center; }
+
+.title { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 10vw, 4rem); background: linear-gradient(135deg, var(--primary), #fff, var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { color: rgba(255,255,255,0.4); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 40px; }
+
+/* Buttons & Navigation */
+.btn-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+.location-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(15px); padding: 20px 30px; border-radius: 15px; color: white; font-family: 'Syne'; cursor: pointer; transition: 0.3s; flex: 1; min-width: 200px; }
+.location-btn:hover { border-color: var(--primary); box-shadow: 0 0 20px var(--glow-cyan); transform: translateY(-5px); }
+
+.category-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
+.nav-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 12px 30px; color: white; border-radius: 50px; cursor: pointer; font-family: 'Syne'; transition: 0.3s; }
+.nav-btn.active { background: var(--primary); color: var(--dark-1); box-shadow: 0 0 15px var(--primary); font-weight: bold; }
+
+/* Slider Logic */
+.slider-wrapper { width: 100%; overflow: hidden; border-radius: 25px; }
+.slider-content { display: flex; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); width: 200%; }
+.slide { width: 50%; padding: 0 10px; }
+
+/* Glass Cards */
+.glass-card { background: var(--glass-bg); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 25px; padding: 30px; }
+.add-on-card { margin-top: 20px; border-style: dashed; }
+.card-title { font-family: 'Syne'; color: var(--primary); margin-bottom: 20px; font-size: 1.2rem; }
+.card-title-small { font-family: 'Syne'; color: var(--secondary); margin-bottom: 15px; font-size: 0.9rem; letter-spacing: 2px; }
+
+.table-responsive { width: 100%; overflow-x: auto; }
+.price-table { width: 100%; border-collapse: collapse; min-width: 400px; }
+.price-table th { padding: 12px; font-size: 0.75rem; color: rgba(255,255,255,0.5); border-bottom: 1px solid var(--glass-border); text-transform: uppercase; }
+.price-table td { padding: 15px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.95rem; }
+
+/* Animations */
+#locationSection {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.exit-up {
+    transform: translateY(-40px) !important;
+    opacity: 0 !important;
+    pointer-events: none;
+}
+/* Animasi keluar ke bawah untuk butang kembali */
+.exit-down {
+    transform: translateY(50px) !important;
+    opacity: 0 !important;
+}
+#priceListSection { 
+    display: block; /* Pastikan sentiasa display block */
+    opacity: 1; 
+    transform: translateY(0); 
+    transition: 0.6s ease-out; 
+}
+#priceListSection.show { display: block; opacity: 1; transform: translateY(0); }
+
+/* BARU TAMBAH SINI*/
+
+
+
+
+/* Class tambahan untuk reset kedudukan asal sebelum muncul semula */
+.prepare-from-top {
+    transform: translateY(-50px) !important;
+    opacity: 0 !important;
+}
+
+.back-link { margin-top: 30px; background: none; border: none; color: var(--secondary); cursor: pointer; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.6; }
+.back-link:hover { opacity: 1; }
