@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+<script src="auth.js"></script>
+<style>
+body {
+    display:flex; justify-content:center; align-items:center;
+    height:100vh; background:#f0f0f0;
+    font-family:Arial;
+}
+.login-box {
+    background:white; padding:30px; border-radius:10px;
+    width:300px; box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+input {
+    width:100%; padding:10px; margin-top:10px;
+    border-radius:6px; border:1px solid #ccc;
+}
+button {
+    width:100%; margin-top:15px; padding:10px;
+    background:black; color:#FFCD00; border:none;
+    border-radius:6px; cursor:pointer; font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="login-box">
+    <h3>Login</h3>
+
+    <input id="username" type="text" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login(
+        document.getElementById('username').value,
+        document.getElementById('password').value
+    )">Login</button>
+</div>
+
+</body>
+</html>

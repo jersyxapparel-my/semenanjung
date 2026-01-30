@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Senarai Invoice - Jersyx Apparel</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="auth.js"></script>
+<script>protectPage();</script>
+
+<style>
+.page-wrap {
+    max-width:1100px;
+    margin:30px auto;
+    padding:10px;
+}
+
+.invoice-card {
+    background:white;
+    border-radius:10px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.invoice-left {
+    width:70%;
+}
+
+.invoice-title {
+    font-size:18px; 
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.invoice-meta {
+    font-size:13px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+.invoice-status {
+    font-weight:700;
+    font-size:16px;
+}
+
+.btn-view {
+    background:black;
+    color:var(--brand-yellow);
+    padding:10px 16px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+}
+
+.topbar2 {
+    background:var(--brand-yellow);
+    padding:14px;
+    font-size:18px;
+    font-weight:700;
+    display:flex; 
+    justify-content:space-between;
+}
+
+.back-btn {
+    background:black;
+    color:var(--brand-yellow);
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    text-decoration:none;
+}
+</style>
+</head>
+<body>
+<a href="dashboard.html" class="btn-back">← Back to Menu</a>
+
+<div class="page-wrap">
+    <div id="invoiceList"></div>
+</div>
+
+
+<div class="topbar2">
+    <div>Senarai Invoice</div>
+    <a href="dashboard.html" class="back-btn">← Dashboard</a>
+</div>
+
+<div class="page-wrap">
+    <div id="invoiceList"></div>
+</div>
+
+<script>
+// ============================
+// LOAD ALL INVOICES
+// ============================
+
+function loadInvoices() {
+    const container = document.getElementById("invoiceList");
+    container.innerHTML = "";
+
+    let keys = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith("INV-")) keys.push(key);
+    }
+
+    if (keys.length === 0) {
+        container.innerHTML = "<p>Tiada invoice direkodkan.</p>";
+        return;
+    }
+
+    keys.sort().forEach(invKey => {
+        const data = JSON.parse(localStorage.getItem(invKey));
+
+        const subtotal = data.items
+            ? data.items.reduce((sum, i) => sum + i.qty * i.price, 0)
+            : 0;
+
+        const grand = subtotal - data.deposit + data.designCharge;
+
+        const statusClass = `status-${data.status}`;
+
+        const card = document.createElement("div");
+        card.className = "invoice-card";
+        card.innerHTML = `
+            <div class="invoice-left">
+                <div class="invoice-title">${invKey}</div>
+
+                <div class="invoice-meta">
+                    Customer: <strong>${data.customer}</strong><br>
+                    Phone: ${data.phone}<br>
+                    Address: ${data.address}<br><br>
+                    Status: <span class="${statusClass} invoice-status">${data.status}</span>
+                </div>
+            </div>
+
+            <div style="text-align:right;">
+                <div style="font-weight:700; margin-bottom:10px;">RM ${grand.toFixed(2)}</div>
+                <button class="btn-view" onclick="viewInvoice('${invKey}')">View</button>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// OPEN INVOICE IN BUILDER
+function viewInvoice(invNo) {
+    // simpan invoice dipilih → nanti invoice-builder.html akan auto load
+    localStorage.setItem("loadInvoiceTemp", invNo);
+    window.location.href = "invoice-builder.html";
+}
+
+loadInvoices();
+</script>
+</body>
+</html>

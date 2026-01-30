@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<script src="auth.js"></script>
+<script>protectPage();</script>
+
+<style>
+.menu-box { 
+    max-width:500px; margin:50px auto; 
+    background:white; padding:20px; border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.05);
+}
+.menu-item {
+    padding:15px; background:#f8f8f8; margin-top:10px;
+    border-radius:8px; cursor:pointer; font-weight:bold;
+}
+.menu-item:hover { background:#FFCD00; }
+.logout-btn {
+    margin-top:20px; text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="menu-box">
+    <h2>Dashboard</h2>
+
+    <div class="menu-item" onclick="window.location.href='invoice-builder.html'">
+        ➜ Invoice Builder
+    </div>
+
+    <div class="menu-item" onclick="window.location.href='invoice-list.html'">
+        ➜ Senarai Invoice
+    </div>
+
+    <div class="menu-item" onclick="window.location.href='sales.html'">
+        ➜ Sales Report
+    </div>
+
+    <div class="logout-btn">
+        <button class="btn btn-primary" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+</body>
+</html>

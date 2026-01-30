@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Invoice - Jersyx Apparel</title>
+
+<link rel="icon" href="https://i.postimg.cc/BQ23Nf9X/logo-jersyx-01.png" />
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="auth.js"></script>
+<script>protectPage();</script>
+
+
+</head>
+<body>
+
+<div class="topbar">
+  <button class="btn" id="btnGenerate">Generate Preview</button>
+  <button class="btn" id="btnPrint">Print</button>
+  <button class="btn btn-primary" id="btnPdf">Download PDF</button>
+	<a href="dashboard.html" class="btn-back">← Back to Menu</a>
+  <div style="flex:1"></div>
+  <div class="small">Jersyx Apparel — Invoice Builder</div>
+</div>
+
+<script>
+// AUTO LOAD FROM INVOICE LIST
+document.addEventListener("DOMContentLoaded", () => {
+    const inv = localStorage.getItem("loadInvoiceTemp");
+    if (inv) {
+        loadInvoice(inv);
+        localStorage.removeItem("loadInvoiceTemp");
+    }
+});
+</script>
+
+<div class="wrap">
+  <div class="layout">
+    <div class="col form">
+      <h3>Invoice Builder</h3>
+
+      <label>No Invoice</label>
+      <input type="text" id="fInvoiceNo" placeholder="INV-0001">
+
+      <label>Nama Customer</label>
+      <input type="text" id="fCustomer" placeholder="Nama penuh / Team">
+
+      <label>Alamat</label>
+      <textarea id="fAddress" placeholder="Alamat pengiriman"></textarea>
+
+      <label>No Telefon</label>
+      <input type="text" id="fPhone" placeholder="012-3456789">
+
+      <label>Payment Status</label>
+      <select id="fPaymentStatus">
+        <option value="Pending">Pending</option>        
+	<option value="Partial">Partial</option>
+	<option value="Paid">Paid</option>
+      </select>
+
+     
+
+<label>Issued By:</label>
+<input type="text" id="fIssuedBy" value="Jersyx - Rara">
+
+<label>Accepted By:</label>
+<input type="text" id="fAcceptedBy" placeholder="Isi kalau customer request">
+
+      <hr>
+
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h4 style="margin:0">Items</h4>
+        <button class="btn" id="addItemBtn">+ Tambah</button>
+      </div>
+
+      <div class="items-list" id="itemsList"></div>
+
+      <label>Deposit (RM)</label>
+      <input type="number" id="fDeposit" value="0" min="0" step="0.01">
+
+      <label>Design Charge (RM)</label>
+      <input type="number" id="fDesign" value="0" min="0" step="0.01">
+
+      <label>Total Paid (RM)</label>
+      <input type="number" id="fPaid" value="0" min="0" step="0.01">
+
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn btn-primary" id="btnGenerate2">Generate</button>
+	<button class="btn" id="btnSave">Save</button>
+	<div class="dropdown-load">
+        <button class="btn" id="btnLoadDropdown">Load &#x25BE;</button>
+        <select id="fLoadInvoiceSelect" class="load-select" style="display:none;"></select>
+    </div>
+	<button class="btn" id="btnClear">Reset</button>
+      </div>
+    </div>
+
+    <div class="col preview">
+      <div id="invoiceRoot">
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
